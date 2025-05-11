@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+}
+
+.homeContainer {
+  background-image: url('../images/main-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.homeContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.title {
+  color: white;
+  margin: 0;
+  z-index: 1;
+}
+
+.titleFirstPart {
+  font-family: "Kirang Haerang", system-ui;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  height: 4rem;
+}
+
+.titleSecondPart {
+  font-family: "Ultra", serif;
+  letter-spacing: 10px;
+  font-size: 6rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+
