@@ -20,9 +20,16 @@
 </head>
 
 <body>
-  <div class="homeContainer">
     <?php include '../components/navbar-admin.php'; ?>
 
-  </div>
+    <div class="homeContainer">
+    aca
+    <?php
+      $imageSrc = 'image.jpg';
+      $altText = 'Descripción';
+      $cardText = 'Texto dinámico para la tarjeta';
+      include '../components/menu-card.php';
+    ?>
+    </div>
 </body>
 </html>

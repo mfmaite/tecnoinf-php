@@ -20,9 +20,10 @@
 </head>
 
 <body>
-  <div class="homeContainer">
-    <?php include 'components/navbar.php'; ?>
+  <?php include 'components/navbar.php'; ?>
 
+  <div class="homeContainer">
+    <div class="overlay"> </div>
     <h2 class="title titleFirstPart">We serve Burgers</h2>
     <h2 class="title titleSecondPart">WITH LOVE</h2>
   </div>

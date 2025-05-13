@@ -1,4 +1,4 @@
 .homeContainer {
   background-color: #495057;
-  height: 100vh;
+  height: calc(100vh - 100px);
 }

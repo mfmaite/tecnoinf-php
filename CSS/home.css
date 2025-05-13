@@ -3,18 +3,19 @@ body {
 }
 
 .homeContainer {
+  position: relative;
   background-image: url('../images/main-background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: calc(100vh - 100px);
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 }
 
-.homeContainer::before {
+.overlay {
   content: "";
   position: absolute;
   top: 0;
