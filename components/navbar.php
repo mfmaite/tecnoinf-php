@@ -1,5 +1,10 @@
 <?php
 $url_base = "http://localhost/restaurant/";
+
+// Get the current page URL
+$current_page = $_SERVER['REQUEST_URI'];
+$is_home = strpos($current_page, '/restaurant/') !== false && strlen($current_page) <= strlen('/restaurant/') + 1;
+$is_menu = strpos($current_page, '/restaurant/menu') !== false;
 ?>
 
 <style>
@@ -23,18 +28,13 @@ $url_base = "http://localhost/restaurant/";
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
+      <li class="nav-item <?php echo $is_home ? 'active' : ''; ?>">
+        <a class="nav-link" href="<?php echo $url_base; ?>">Home</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+      <li class="nav-item <?php echo $is_menu ? 'active' : ''; ?>">
+        <a class="nav-link" href="<?php echo $url_base; ?>menu">Menú</a>
       </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-
     </ul>
   </div>
 </nav>
