@@ -1,3 +1,7 @@
+<?php
+$url_base = "http://localhost/restaurant/admin";
+?>
+
 <style>
   .navbarComponent {
     position: absolute;
@@ -15,7 +19,7 @@
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbarComponent">
-  <a class="navbar-brand brandTitle" href="#">ADMIN</a>
+  <a class="navbar-brand brandTitle" href="<?php echo $url_base;?>">ADMIN</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

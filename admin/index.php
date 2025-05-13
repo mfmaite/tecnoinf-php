@@ -8,7 +8,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="../CSS/home.css" type="text/css">
+  <link rel="stylesheet" href="../CSS/home-admin.css" type="text/css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,6 @@
   <div class="homeContainer">
     <?php include '../components/navbar-admin.php'; ?>
 
-    <h2 class="title titleSecondPart">Admin Panel</h2>
   </div>
 </body>
 </html>
