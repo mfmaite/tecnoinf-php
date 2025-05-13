@@ -1,4 +1,24 @@
 .homeContainer {
   background-color: #495057;
   height: calc(100vh - 100px);
+  padding-top: 60px;
 }
+
+.menuContainer {
+  display: flex;
+  gap: 20px;
+  padding-top: 40px;
+}
+
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .menuTitle {
+    color: white;
+    font-size: 2rem;
+    font-family: "Ultra", serif;
+  }
+}
+

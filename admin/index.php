@@ -1,3 +1,10 @@
+<?php
+  include("../bd.php");
+  $query=$connection->prepare("SELECT * FROM `menu`");
+  $query->execute();
+  $menus=$query->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,13 +30,22 @@
     <?php include '../components/navbar-admin.php'; ?>
 
     <div class="homeContainer">
-    aca
-    <?php
-      $imageSrc = 'image.jpg';
-      $altText = 'Descripción';
-      $cardText = 'Texto dinámico para la tarjeta';
-      include '../components/menu-card.php';
-    ?>
+      <div class="container">
+        <div class="menuHeader">
+          <h2 class="menuTitle">Lista de Menús</h2>
+          <button class="btn btn-primary">Agregar Menú</button>
+        </div>
+
+        <div class="menuContainer">
+          <?php foreach ($menus as $menu) { ?>
+            <?php
+              $imageSrc = $menu['photoUrl'];
+              $menuName = $menu['name'];
+              $menuPrice = $menu['price'];
+              include '../components/menu-card.php';
+            ?>
+          <?php } ?>
+      </div>
     </div>
 </body>
 </html>
