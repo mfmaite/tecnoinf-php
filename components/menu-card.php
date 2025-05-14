@@ -1,4 +1,8 @@
 <style>
+  .menuCard {
+    min-width: 250px;
+  }
+
   .card-body {
     display: flex;
     flex-direction: column;

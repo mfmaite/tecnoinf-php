@@ -3,6 +3,7 @@
     display: flex;
     gap: 20px;
     padding-top: 40px;
+    flex-wrap: wrap;
   }
 
   .menuHeader {
@@ -20,7 +21,7 @@
 
 <?php
   include("../bd.php");
-  $query=$connection->prepare("SELECT * FROM `menu`");
+  $query=$connection->prepare("SELECT * FROM `menus`");
   $query->execute();
   $menus=$query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -32,7 +33,9 @@
   <div class="menuHeader">
     <h2 class="menuTitle">Lista de Menús</h2>
     <?php if ($isAdmin): ?>
-      <button class="btn btn-primary">Agregar Menú</button>
+      <a href="/restaurant/admin/menu/new" class="btn btn-primary">
+        Agregar Menú
+      </a>
     <?php endif; ?>
   </div>
 
@@ -47,3 +50,7 @@
     <?php } ?>
   </div>
 </div>
+
+<?php if ($isAdmin): ?>
+  <?php include '../add-menu.php'; ?>
+<?php endif; ?>
