@@ -1,16 +1,23 @@
 <?php
   include("../../../bd.php");
 
+  // Get URL parameters
+  $id = isset($_GET['id']) ? $_GET['id'] : '';
+  $name = isset($_GET['name']) ? $_GET['name'] : '';
+  $price = isset($_GET['price']) ? $_GET['price'] : '';
+  $image = isset($_GET['image']) ? $_GET['image'] : '';
+
   if ($_POST) {
     $name=(isset($_POST['name'])) ? $_POST['name'] : '';
     $price=(isset($_POST['price'])) ? $_POST['price'] : '';
     $photo=(isset($_POST['photo'])) ? $_POST['photo'] : '';
 
-    $query=$connection->prepare("INSERT INTO `menus`(`name`, `price`, `photoUrl`) VALUES (:name, :price, :photoUrl)");
+    $query=$connection->prepare("UPDATE `menus` SET `name`=:name, `price`=:price, `photoUrl`=:photoUrl WHERE id=:id");
 
     $query->bindParam(':name', $name);
     $query->bindParam(':price', $price);
     $query->bindParam(':photoUrl', $photo);
+    $query->bindParam(':id', $id);
 
     $query->execute();
 
@@ -23,7 +30,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuevo Menú - Pachepé</title>
+  <title>Editar Menú - Pachepé</title>
 
   <link rel="stylesheet" href="../menu.css" type="text/css">
 
@@ -78,6 +85,7 @@
             id="menu-name"
             name="name"
             required
+            value="<?php echo htmlspecialchars($name); ?>"
             placeholder="Ingrese el nombre del plato">
         </div>
 
@@ -93,6 +101,7 @@
               name="price"
               step="0.01"
               required
+              value="<?php echo htmlspecialchars($price); ?>"
               placeholder="0.00">
           </div>
         </div>
@@ -104,12 +113,13 @@
               class="form-control"
               id="menu-photo"
               name="photo"
+              value="<?php echo htmlspecialchars($image); ?>"
               placeholder="Ingrese el link a la foto">
           </div>
         </div>
 
         <div class="form-group text-center">
-          <a href="../" class="btn btn-secondary mr-2">Cancelar</a>
+          <a href="/restaurant/admin/menu/index.php" class="btn btn-secondary mr-2">Cancelar</a>
           <button type="submit" class="btn btn-primary">Guardar Menú</button>
         </div>
       </form>
