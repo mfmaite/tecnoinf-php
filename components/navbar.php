@@ -28,10 +28,6 @@ $is_menu = strpos($current_page, '/restaurant/menu') !== false;
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item <?php echo $is_home ? 'active' : ''; ?>">
-        <a class="nav-link" href="<?php echo $url_base; ?>">Home</a>
-      </li>
-
       <li class="nav-item <?php echo $is_menu ? 'active' : ''; ?>">
         <a class="nav-link" href="<?php echo $url_base; ?>menu">Menú</a>
       </li>

@@ -119,7 +119,7 @@
         </div>
 
         <div class="form-group text-center">
-          <a href="/restaurant/admin/menu/index.php" class="btn btn-secondary mr-2">Cancelar</a>
+          <a href="/restaurant/admin/" class="btn btn-secondary mr-2">Cancelar</a>
           <button type="submit" class="btn btn-primary">Guardar Menú</button>
         </div>
       </form>
