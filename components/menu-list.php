@@ -43,6 +43,7 @@
     <?php foreach ($menus as $menu) { ?>
       <?php
         $imageSrc = $menu['photoUrl'];
+        $menuId = $menu['id'];
         $menuName = $menu['name'];
         $menuPrice = $menu['price'];
         include '../components/menu-card.php';

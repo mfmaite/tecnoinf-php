@@ -68,7 +68,7 @@
 
   <div class="newMenuContainer">
     <div class="form-container container">
-      <h2 class="page-title">Agregar Nuevo Menú</h2>
+      <h2 class="page-title">Editar Menú</h2>
 
       <form id="newMenuForm" enctype="multipart/form-data" action="" method="post">
         <div class="form-group">
@@ -109,7 +109,7 @@
         </div>
 
         <div class="form-group text-center">
-          <a href="/restaurant/admin/" class="btn btn-secondary mr-2">Cancelar</a>
+          <a href="../" class="btn btn-secondary mr-2">Cancelar</a>
           <button type="submit" class="btn btn-primary">Guardar Menú</button>
         </div>
       </form>
