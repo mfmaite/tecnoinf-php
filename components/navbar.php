@@ -6,6 +6,7 @@ $url_base = "http://localhost/restaurant/";
 $current_page = $_SERVER['REQUEST_URI'];
 $is_home = strpos($current_page, '/restaurant/') !== false && strlen($current_page) <= strlen('/restaurant/') + 1;
 $is_menu = strpos($current_page, '/restaurant/menu') !== false;
+$is_login = strpos($current_page, '/restaurant/login') !== false;
 ?>
 
 <link rel="stylesheet" href="<?php echo $url_base; ?>CSS/fonts.css">
@@ -37,10 +38,17 @@ $is_menu = strpos($current_page, '/restaurant/menu') !== false;
         </li>
       <?php endif; ?>
 
-      <?php if (!isset($_SESSION['user']['role'])): ?>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <?php if (isset($_SESSION['user']['role'])): ?>
         <li class="nav-item">
-          <a class="nav-link font-ultra" href="<?php echo $url_base; ?>login">Iniciar sesión</a>
+          <a class="nav-link font-ultra" href="<?php echo $url_base; ?>logout">Cerrar sesión</a>
         </li>
+        <?php else: ?>
+          <li class="nav-item <?php echo $is_login ? 'active' : ''; ?>">
+            <a class="nav-link font-ultra" href="<?php echo $url_base; ?>login">Iniciar sesión</a>
+          </li>
       <?php endif; ?>
     </ul>
   </div>
