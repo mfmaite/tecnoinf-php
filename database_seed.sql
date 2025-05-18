@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS restaurant;
 USE restaurant;
 
 DROP TABLE IF EXISTS `menus`;
+DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
