@@ -1,4 +1,5 @@
 <?php
+session_start();
 $url_base = "http://localhost/restaurant/";
 
 // Get the current page URL
@@ -22,30 +23,25 @@ $is_menu = strpos($current_page, '/restaurant/menu') !== false;
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbarComponent">
-  <a class="navbar-brand brandTitle font-ultra" href="<?php echo $url_base;?>">PACHEPÉ</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin'): ?>
+    <a class="navbar-brand brandTitle font-ultra" href="<?php echo $url_base;?>admin">ADMIN</a>
+  <?php else: ?>
+    <a class="navbar-brand brandTitle font-ultra" href="<?php echo $url_base;?>">PACHEPÉ</a>
+  <?php endif; ?>
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item <?php echo $is_menu ? 'active' : ''; ?>">
-        <a class="nav-link font-ultra" href="<?php echo $url_base; ?>menu">Menú</a>
-      </li>
+      <?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'user'): ?>
+        <li class="nav-item <?php echo $is_menu ? 'active' : ''; ?>">
+          <a class="nav-link font-ultra" href="<?php echo $url_base; ?>menu">Menú</a>
+        </li>
+      <?php endif; ?>
+
+      <?php if (!isset($_SESSION['user']['role'])): ?>
+        <li class="nav-item">
+          <a class="nav-link font-ultra" href="<?php echo $url_base; ?>login">Iniciar sesión</a>
+        </li>
+      <?php endif; ?>
     </ul>
   </div>
 </nav>
-
-<?php
-/*require_once __DIR__ . '/../auth.php';*/
-?>
-
-<div class="ml-auto pr-4">
-  <?php /*if (isLoggedIn()): ?>
-    <span class="font-ultra">Hola, <?= htmlspecialchars($_SESSION['user']['email']) ?>!</span>
-    <a href="/restaurant/auth_pages/logout.php" class="btn btn-outline-danger ml-2">Logout</a>
-  <?php else: ?>
-    <a href="/restaurant/auth_pages/index.php" class="btn btn-outline-primary ml-2">Login</a>
-    <a href="/restaurant/auth_pages/signup.php" class="btn btn-outline-secondary ml-2">Registrarse</a>
-  <?php endif;*/ ?>
-</div>

@@ -1,19 +1,33 @@
 <?php
   include("../bd.php");
+  $errors = [];
 
   if ($_POST) {
-    $email = (isset($_POST['email'])) ? $_POST['email'] : '';
-    $password = (isset($_POST['password'])) ? $_POST['password'] : '';
-    $password=$password;
+   try {
+      $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+      $password = (isset($_POST['password'])) ? $_POST['password'] : '';
+      $password=$password;
 
-    $query = $connection->prepare("INSERT INTO users (email, password_hash, role) VALUES (:email, :password, 'user')");
+      $stmt = $connection->prepare("SELECT id FROM users WHERE email = ?");
+      $stmt->execute([$email]);
 
-    $query->bindParam(':email', $email);
-    $query->bindParam(':password', $password);
+      if ($stmt->fetch()) {
+          $errors[] = "Ya existe un usuario con ese email.";
+      } else {
+        $query = $connection->prepare("INSERT INTO users (email, password_hash, role) VALUES (:email, :password, 'user')");
 
-    $query->execute();
+        $query->bindParam(':email', $email);
+        $query->bindParam(':password', $password);
 
-    header("Location:../index.php");
+        $query->execute();
+
+        header("Location:../index.php");
+      }
+    } catch (PDOException $e) {
+      $errors[] = "Error en la base de datos: " . $e->getMessage();
+    } catch (Exception $e) {
+      $errors[] = "Error inesperado: " . $e->getMessage();
+    }
   }
 ?>
 
@@ -32,11 +46,12 @@
 <body>
   <?php include '../components/navbar.php'; ?>
 
-  <?php foreach ($errors as $error): ?>
-    <p style="color: red;"><?= htmlspecialchars($error) ?></p>
-  <?php endforeach; ?>
-
   <div class="homeContainer">
+      <?php if (!empty($errors)): ?>
+            <?php foreach ($errors as $error): ?>
+                <div class="alert alert-danger errorContainer"><?= htmlspecialchars($error) ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     <div class="overlay"> </div>
   </div>
 

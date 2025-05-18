@@ -15,16 +15,19 @@ if ($_POST) {
         $query->execute();
 
         $user = $query->fetch(PDO::FETCH_ASSOC);
-        print_r($user);
 
         if ($user) {
-            // Login exitoso
             $_SESSION['user'] = [
-                'id' => $user['id'],
                 'email' => $user['email'],
                 'role' => $user['role']
             ];
-
+            $_SESSION['loggedIn'] = true;
+            print_r($_SESSION);
+            if ($user['role'] == 'admin') {
+                header("Location: ../admin/index.php");
+            } else {
+                header("Location: ../index.php");
+            }
             exit;
         } else {
             $errors[] = "Email o contraseña incorrectos";

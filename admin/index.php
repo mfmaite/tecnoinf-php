@@ -12,12 +12,10 @@
 </head>
 
 <body>
-    <?php include '../components/navbar-admin.php'; ?>
+    <?php include '../components/navbar.php'; ?>
 
     <div class="homeContainer">
-      <?php
-        $isAdmin = true;
-        include '../components/menu-list.php'; ?>
+      <?php include '../components/menu-list.php'; ?>
     </div>
 </body>
 </html>

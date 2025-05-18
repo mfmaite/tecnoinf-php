@@ -71,7 +71,7 @@ if (empty($menuId)) {
 </head>
 
 <body class="bg-light">
-  <?php include '../../../components/navbar-admin.php'; ?>
+  <?php include '../../../components/navbar.php'; ?>
 
   <div class="container">
     <div class="delete-container">
