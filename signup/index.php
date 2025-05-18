@@ -7,9 +7,11 @@
 
   if ($_POST) {
    try {
-      $email = (isset($_POST['email'])) ? $_POST['email'] : '';
-      $password = (isset($_POST['password'])) ? $_POST['password'] : '';
-      $password=$password;
+      $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
+      $password = isset($_POST['password']) ? $_POST['password'] : '';
+
+      // Crear el hash de la contraseña
+      $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
       $stmt = $connection->prepare("SELECT id FROM users WHERE email = ?");
       $stmt->execute([$email]);
@@ -20,11 +22,29 @@
         $query = $connection->prepare("INSERT INTO users (email, password_hash, role) VALUES (:email, :password, 'user')");
 
         $query->bindParam(':email', $email);
-        $query->bindParam(':password', $password);
+        $query->bindParam(':password', $passwordHash);
 
         $query->execute();
 
-        header("Location:../index.php");
+        $userId = $connection->lastInsertId();
+
+        $getUserQuery = $connection->prepare("SELECT * FROM users WHERE id = :id");
+        $getUserQuery->bindParam(':id', $userId);
+        $getUserQuery->execute();
+        $user = $getUserQuery->fetch(PDO::FETCH_ASSOC);
+
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['user'] = [
+            'email' => $user['email'],
+            'role' => $user['role']
+        ];
+
+        if ($user['role'] === 'admin') {
+            header("Location: /restaurant/admin/index.php");
+        } else {
+            header("Location: /restaurant/index.php");
+        }
+        exit;
       }
     } catch (PDOException $e) {
       $errors[] = "Error en la base de datos: " . $e->getMessage();

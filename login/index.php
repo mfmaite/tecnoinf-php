@@ -12,20 +12,19 @@ if ($_POST) {
         $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
         $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-        $query = $connection->prepare("SELECT * FROM users WHERE email = :email AND password_hash = :password");
+        $query = $connection->prepare("SELECT * FROM users WHERE email = :email");
         $query->bindParam(':email', $email);
-        $query->bindParam(':password', $password);
         $query->execute();
 
         $user = $query->fetch(PDO::FETCH_ASSOC);
 
-        if ($user) {
+        if ($user && password_verify($password, $user['password_hash'])) {
             $_SESSION['user'] = [
                 'email' => $user['email'],
                 'role' => $user['role']
             ];
             $_SESSION['loggedIn'] = true;
-            print_r($_SESSION);
+
             if ($user['role'] == 'admin') {
                 header("Location: ../admin/index.php");
             } else {
