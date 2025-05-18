@@ -34,3 +34,17 @@ $is_menu = strpos($current_page, '/restaurant/menu') !== false;
     </ul>
   </div>
 </nav>
+
+<?php
+require_once __DIR__ . '/../auth.php';
+?>
+
+<div class="ml-auto pr-4">
+  <?php if (isLoggedIn()): ?>
+    <span>Hola, <?= htmlspecialchars($_SESSION['user']['email']) ?>!</span>
+    <a href="/restaurant/auth_pages/logout.php" class="btn btn-outline-danger ml-2">Logout</a>
+  <?php else: ?>
+    <a href="/restaurant/auth_pages/login.php" class="btn btn-outline-primary ml-2">Login</a>
+    <a href="/restaurant/auth_pages/signup.php" class="btn btn-outline-secondary ml-2">Registrarse</a>
+  <?php endif; ?>
+</div>

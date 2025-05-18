@@ -21,7 +21,7 @@ A restaurant website with menu management features built with PHP, MySQL, and Bo
 2. **Clone the Repository**
    ```bash
    cd /path/to/xampp/htdocs
-   git clone [your-repository-url]
+   git clone git@github.com:mfmaite/tecnoinf-php.git
    cd restaurant
    ```
 
@@ -35,7 +35,7 @@ A restaurant website with menu management features built with PHP, MySQL, and Bo
      ```
    - Update the XAMPP path according to your installation:
      ```bash
-     XAMPP_PATH="/Applications/XAMPP/xamppfiles"  # Update this path
+     XAMPP_PATH="C:/xampp"  # Update this path
      ```
 
 ## Database Setup
