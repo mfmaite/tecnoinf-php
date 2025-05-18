@@ -1,56 +1,65 @@
 <?php
-/*session_start();
-require_once 'bd.php';
+  include("../bd.php");
 
-$errors = [];
+  if ($_POST) {
+    $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+    $password = (isset($_POST['password'])) ? $_POST['password'] : '';
+    $password=password_hash($password, PASSWORD_DEFAULT);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $role = 'user'; // por defecto, a menos que quieras permitir admins desde aquí
+    $query = $connection->prepare("INSERT INTO users (email, password_hash, role) VALUES (:email, :password, 'user')");
 
-    if (empty($email) || empty($password)) {
-        $errors[] = "Email y contraseña son obligatorios.";
-    } else {
-        // Verificar si el usuario ya existe
-        $stmt = $connection->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        if ($stmt->fetch()) {
-            $errors[] = "Ya existe un usuario con ese email.";
-        } else {
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $connection->prepare("INSERT INTO users (email, password_hash, role) VALUES (?, ?, ?)");
-            $stmt->execute([$email, $passwordHash, $role]);
+    $query->bindParam(':email', $email);
+    $query->bindParam(':password', $password);
 
-            $_SESSION['user'] = [
-                'email' => $email,
-                'role' => $role
-            ];
+    $query->execute();
 
-            header("Location: index.php");
-            exit;
-        }
-    }
-}*/
+    header("Location:../index.php");
+  }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro</title>
+  <title>Iniciar sesión</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../CSS/fonts.css">
+  <link rel="stylesheet" href="../CSS/home.css">
+  <link rel="stylesheet" href="../CSS/auth-pages.css">
 </head>
 <body>
-  <h1>Registro</h1>
+  <?php include '../components/navbar.php'; ?>
+
   <?php foreach ($errors as $error): ?>
     <p style="color: red;"><?= htmlspecialchars($error) ?></p>
   <?php endforeach; ?>
 
-  <form method="POST">
-    <label>Email: <input type="email" name="email" required></label><br>
-    <label>Contraseña: <input type="password" name="password" required></label><br>
-    <button type="submit">Registrarse</button>
-  </form>
-  <p>¿Ya tenés cuenta? <a href="login.php">Iniciar sesión</a></p>
+  <div class="homeContainer">
+    <div class="overlay"> </div>
+  </div>
+
+  <div class="loginContainer">
+    <h1 class="title-text text-center mb-4">Registrarse</h1>
+    <form method="POST">
+      <div class="formFieldComponent">
+        <label class="formLabel" for="email">Email</label>
+        <input class="formInput" type="email" name="email" required>
+      </div>
+
+      <div class="formFieldComponent">
+        <label class="formLabel" for="password">Contraseña</label>
+        <input class="formInput" type="password" name="password" required>
+      </div>
+
+      <div class="form-group buttonContainer">
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </div>
+    </form>
+
+    <p class="signup-link text-center">¿Ya tenés cuenta? <a href="/restaurant/login">Iniciar sesión</a></p>
+  </div>
 </body>
 </html>
+

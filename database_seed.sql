@@ -26,5 +26,9 @@ INSERT INTO `menus` (`name`, `price`, `photoUrl`) VALUES
 ('Beyond burger', 600.00, 'https://img2.rtve.es/n/2119800'),
 ('Pulled Pork', 620.00, 'https://www.giallozafferano.com/images/284-28461/Pulled-Pork_1200x800.jpg');
 
+-- password: password
 INSERT INTO users (email, password_hash, role) VALUES
 ('admin@pachepe.com', '$2y$10$pl0GyhaS/NUtz2akm.ehMuZJeAtec2Qtg/MqFEh.E9AQb3eXD/TaW', 'admin');
+
+INSERT INTO users (email, password_hash, role) VALUES
+('user@pachepe.com', '$2y$10$pl0GyhaS/NUtz2akm.ehMuZJeAtec2Qtg/MqFEh.E9AQb3eXD/TaW', 'user');
