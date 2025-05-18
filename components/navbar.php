@@ -7,6 +7,7 @@ $current_page = $_SERVER['REQUEST_URI'];
 $is_home = strpos($current_page, '/restaurant/') !== false && strlen($current_page) <= strlen('/restaurant/') + 1;
 $is_menu = strpos($current_page, '/restaurant/menu') !== false;
 $is_login = strpos($current_page, '/restaurant/login') !== false;
+$is_cart = strpos($current_page, '/restaurant/cart') !== false;
 ?>
 
 <link rel="stylesheet" href="<?php echo $url_base; ?>CSS/fonts.css">
@@ -35,6 +36,9 @@ $is_login = strpos($current_page, '/restaurant/login') !== false;
       <?php if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'user'): ?>
         <li class="nav-item <?php echo $is_menu ? 'active' : ''; ?>">
           <a class="nav-link font-ultra" href="<?php echo $url_base; ?>menu">Menú</a>
+        </li>
+        <li class="nav-item <?php echo $is_cart ? 'active' : ''; ?>">
+          <a class="nav-link font-ultra" href="<?php echo $url_base; ?>cart">Carrito</a>
         </li>
       <?php endif; ?>
 

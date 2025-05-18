@@ -79,7 +79,7 @@
   </div>
 
   <div class="loginContainer">
-    <h1 class="title-text text-center mb-4">Registrarse</h1>
+    <h1 class="subTitle text-center mb-4">Registrarse</h1>
     <form method="POST">
       <div class="formFieldComponent">
         <label class="formLabel" for="email">Email</label>

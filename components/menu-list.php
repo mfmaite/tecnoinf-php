@@ -1,3 +1,38 @@
+<?php
+  session_start();
+  include("../bd.php");
+  $query=$connection->prepare("SELECT * FROM `menus`");
+  $query->execute();
+  $menus=$query->fetchAll(PDO::FETCH_ASSOC);
+
+  $isAdmin = isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin';
+?>
+
+<link rel="stylesheet" href="../CSS/fonts.css" type="text/css">
+
+<div class="container">
+  <div class="menuHeader">
+    <h2 class="h2">Menú</h2>
+    <?php if ($isAdmin): ?>
+      <a href="/restaurant/admin/menu/new" class="btn btn-primary">
+        Agregar Menú
+      </a>
+    <?php endif; ?>
+  </div>
+
+  <div class="menuContainer">
+    <?php foreach ($menus as $menu) { ?>
+      <?php
+        $menuId = $menu['id'];
+        $menuName = $menu['name'];
+        $menuPrice = $menu['price'];
+        $imageSrc = $menu['photoUrl'];
+        include '../components/menu-card.php';
+      ?>
+    <?php } ?>
+  </div>
+</div>
+
 <style>
   .menuContainer {
     display: flex;
@@ -10,49 +45,5 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .menuTitle {
-      color: white;
-      font-size: 2rem;
-      font-family: "Ultra", serif;
-    }
   }
 </style>
-
-<?php
-  session_start();
-  include("../bd.php");
-  $query=$connection->prepare("SELECT * FROM `menus`");
-  $query->execute();
-  $menus=$query->fetchAll(PDO::FETCH_ASSOC);
-
-  // Get isAdmin parameter, default to false if not set
-  $isAdmin = isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin';
-?>
-
-<div class="container">
-  <div class="menuHeader">
-    <h2 class="menuTitle">Lista de Menús</h2>
-    <?php if ($isAdmin): ?>
-      <a href="/restaurant/admin/menu/new" class="btn btn-primary">
-        Agregar Menú
-      </a>
-    <?php endif; ?>
-  </div>
-
-  <div class="menuContainer">
-    <?php foreach ($menus as $menu) { ?>
-      <?php
-        $imageSrc = $menu['photoUrl'];
-        $menuId = $menu['id'];
-        $menuName = $menu['name'];
-        $menuPrice = $menu['price'];
-        include '../components/menu-card.php';
-      ?>
-    <?php } ?>
-  </div>
-</div>
-
-<?php if ($isAdmin): ?>
-  <?php include '../add-menu.php'; ?>
-<?php endif; ?>

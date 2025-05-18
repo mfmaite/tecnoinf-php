@@ -9,12 +9,18 @@
   font-family: "Kirang Haerang", system-ui;
 }
 
-.title-text {
-  font-family: "Ultra", serif;
-  color: #333;
-}
-
 .subtitle-text {
   font-family: "Kirang Haerang", system-ui;
   letter-spacing: 2px;
+}
+
+.h2 {
+  color: white;
+  font-size: 2rem;
+  font-family: "Ultra", serif;
+}
+
+.subTitle {
+  font-family: "Ultra", serif;
+  color: #333;
 }
