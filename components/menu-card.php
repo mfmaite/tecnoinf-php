@@ -1,7 +1,7 @@
 <div class="card menuCard" style="width: 18rem;">
   <?php if (isset($isAdmin) && $isAdmin): ?>
     <a href="/restaurant/admin/menu/delete/?id=<?= urlencode($menu['id']) ?>&name=<?= urlencode($menuName) ?>&price=<?= urlencode($menuPrice) ?>&image=<?= urlencode($imageSrc) ?>"
-       class="btn delete-btn">
+       class="button delete-btn">
       X
     </a>
   <?php else: ?>
@@ -10,7 +10,7 @@
       <input type="hidden" name="name" value="<?= htmlspecialchars($menuName) ?>">
       <input type="hidden" name="price" value="<?= htmlspecialchars($menuPrice) ?>">
       <input type="hidden" name="image" value="<?= htmlspecialchars($imageSrc) ?>">
-      <button type="submit" class="btn add-to-cart-btn">+</button>
+      <button type="submit" class="button add-to-cart-btn">+</button>
     </form>
   <?php endif; ?>
   <img
@@ -67,7 +67,7 @@
     object-fit: cover;
   }
 
-  .btn {
+  .button {
     position: absolute;
     top: 10px;
     right: 10px;

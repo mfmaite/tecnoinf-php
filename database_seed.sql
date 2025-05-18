@@ -24,11 +24,16 @@ CREATE TABLE `users` (
 
 INSERT INTO `menus` (`name`, `price`, `photoUrl`) VALUES
 ('Beyond burger', 600.00, 'https://img2.rtve.es/n/2119800'),
-('Pulled Pork', 620.00, 'https://www.giallozafferano.com/images/284-28461/Pulled-Pork_1200x800.jpg');
+('Pulled Pork', 620.00, 'https://www.giallozafferano.com/images/284-28461/Pulled-Pork_1200x800.jpg'),
+('Classic Cheese Burger', 550.00, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFnPwnmWfGuVXblPZHvkl_CFBU46SdPyrz-g&s'),
+('Spicy Jalapeño Burger', 590.00, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScxTJH03WMbg0qeJEQTYfMk0Qqzopp3JU5aA&s'),
+('Avocado Ranch Burger', 650.00, 'https://carmyy.com/wp-content/uploads/2023/01/Avocado-Burgers-500x500.jpg'),
+('Onion Ring Burger', 670.00, 'https://static.wixstatic.com/media/19cb78_d38457f7e3ab4faa980c6fb014517496~mv2.png/v1/fill/w_1081,h_1081,al_c/BBQ%20Chili%20Onion%20Ring%20Burger.%20png.png'),
+('Blue Cheese Burger', 640.00, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhhP4c2exuSrBhkRNGJkhs8QmCJ9ioWR72Wg&s');
 
--- password: password
+-- password: pass
 INSERT INTO users (email, password_hash, role) VALUES
-('admin@pachepe.com', '$2y$10$pl0GyhaS/NUtz2akm.ehMuZJeAtec2Qtg/MqFEh.E9AQb3eXD/TaW', 'admin');
+('admin@pachepe.com', '$2y$10$jhPUclwL80KJKAs4wCsSk.8Ogps9ASzaEKoW2vnV2m0HDkPZRPw3.', 'admin');
 
 INSERT INTO users (email, password_hash, role) VALUES
-('user@pachepe.com', '$2y$10$pl0GyhaS/NUtz2akm.ehMuZJeAtec2Qtg/MqFEh.E9AQb3eXD/TaW', 'user');
+('user@pachepe.com', '$2y$10$jhPUclwL80KJKAs4wCsSk.8Ogps9ASzaEKoW2vnV2m0HDkPZRPw3.', 'user');
