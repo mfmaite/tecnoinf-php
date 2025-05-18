@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/../middleware/auth.php';
+isAlreadyLoggedIn();
+
 session_start();
 include("../bd.php");
 

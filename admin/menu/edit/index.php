@@ -1,4 +1,7 @@
 <?php
+  require_once __DIR__ . '../../../../middleware/auth.php';
+  requireAdmin();
+
   include("../../../bd.php");
 
   // Get URL parameters

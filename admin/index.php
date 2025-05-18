@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../middleware/auth.php';
+requireAdmin();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

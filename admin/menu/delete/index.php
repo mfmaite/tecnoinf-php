@@ -1,4 +1,7 @@
 <?php
+  require_once __DIR__ . '../../../../middleware/auth.php';
+  requireAdmin();
+
 // Obtener los parámetros de la URL
 $menuId = isset($_GET['id']) ? $_GET['id'] : '';
 $menuName = isset($_GET['name']) ? $_GET['name'] : '';
