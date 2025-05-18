@@ -4,7 +4,7 @@
   if ($_POST) {
     $email = (isset($_POST['email'])) ? $_POST['email'] : '';
     $password = (isset($_POST['password'])) ? $_POST['password'] : '';
-    $password=password_hash($password, PASSWORD_DEFAULT);
+    $password=$password;
 
     $query = $connection->prepare("INSERT INTO users (email, password_hash, role) VALUES (:email, :password, 'user')");
 
