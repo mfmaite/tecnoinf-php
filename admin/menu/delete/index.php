@@ -1,4 +1,7 @@
 <?php
+  require_once __DIR__ . '../../../../middleware/auth.php';
+  requireAdmin();
+
 // Obtener los parámetros de la URL
 $menuId = isset($_GET['id']) ? $_GET['id'] : '';
 $menuName = isset($_GET['name']) ? $_GET['name'] : '';
@@ -71,7 +74,7 @@ if (empty($menuId)) {
 </head>
 
 <body class="bg-light">
-  <?php include '../../../components/navbar-admin.php'; ?>
+  <?php include '../../../components/navbar.php'; ?>
 
   <div class="container">
     <div class="delete-container">

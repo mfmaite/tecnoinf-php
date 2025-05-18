@@ -20,13 +20,14 @@
 </style>
 
 <?php
+  session_start();
   include("../bd.php");
   $query=$connection->prepare("SELECT * FROM `menus`");
   $query->execute();
   $menus=$query->fetchAll(PDO::FETCH_ASSOC);
 
   // Get isAdmin parameter, default to false if not set
-  $isAdmin = isset($isAdmin) ? $isAdmin : false;
+  $isAdmin = isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin';
 ?>
 
 <div class="container">

@@ -1,4 +1,7 @@
 <?php
+  require_once __DIR__ . '../../../../middleware/auth.php';
+  requireAdmin();
+
   include("../../../bd.php");
 
   // Get URL parameters
@@ -71,7 +74,7 @@
 </head>
 
 <body>
-  <?php include '../../../components/navbar-admin.php'; ?>
+  <?php include '../../../components/navbar.php'; ?>
 
   <div class="newMenuContainer">
     <div class="form-container container">

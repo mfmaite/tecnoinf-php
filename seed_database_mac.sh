@@ -5,14 +5,14 @@ MYSQL_PASSWORD=""
 MYSQL_HOST="localhost"
 MYSQL_PORT="3376"
 # Update this path to your XAMPP installation path
-XAMPP_PATH="C:/xampp"
+XAMPP_PATH="/Applications/XAMPP/xamppfiles"
 
-if ! tasklist | grep -q mysqld; then
-  echo "MySQL no está corriendo."
-  exit 1
+if ! pgrep -x "mysqld" > /dev/null; then
+    sudo $XAMPP_PATH/xampp startmysql
+    sleep 5
 fi
 
-$XAMPP_PATH/mysql/bin/mysql -h $MYSQL_HOST -u $MYSQL_USER --password="$MYSQL_PASSWORD" < database_seed.sql
+$XAMPP_PATH/bin/mysql -h $MYSQL_HOST -u $MYSQL_USER --password="$MYSQL_PASSWORD" < database_seed.sql
 
 if [ $? -eq 0 ]; then
     echo "Database seeded successfully!"
