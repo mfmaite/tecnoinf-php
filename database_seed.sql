@@ -20,7 +20,17 @@ CREATE TABLE `users` (
   `role` ENUM('admin', 'user') DEFAULT 'user',
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE favoritos (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NOT NULL,
+    `menu_id` int(11) NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+    FOREIGN KEY (`menu_id`) REFERENCES menus(`id`),
+    UNIQUE(user_id, menu_id),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `menus` (`name`, `price`, `photoUrl`) VALUES
 ('Beyond burger', 600.00, 'https://img2.rtve.es/n/2119800'),

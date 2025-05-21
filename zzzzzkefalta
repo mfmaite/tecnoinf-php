@@ -1,0 +1,7 @@
+Requisitos opcionales (todos son para un cliente): 
+  Agregar Menu a Favorito 
+  Eliminar Menú de Favorito 
+●  Ordenar Menú por precio/alfabéticamente 
+●  Agregar/Eliminar Menú de Carrito de Compra 
+  Realizar una compra (se debe realizar un envío de mail con lo que se compró) 
+  Ver historial de compras, la más reciente primero 
