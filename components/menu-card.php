@@ -5,8 +5,9 @@
     <!-- Botón de favoritos -->
     <form action="/restaurant/process/toggle-favorite.php" method="post" class="favorite-form" style="display:inline;">
       <input type="hidden" name="menu_id" value="<?= htmlspecialchars($menuId) ?>">
+      <input type="hidden" name="action" value="<?= in_array($menuId, $favoritos) ? 'remove' : 'add' ?>">
       <button type="submit" class="favorite-btn" style="border:none; background:none;">
-        <?= in_array($menuId, $favoritos) ? 'Quitar de fav' : 'Favoritear' ?>
+        <?= in_array($menuId, $favoritos) ? '❤️' : '🤍' ?>
       </button>
     </form>
 
@@ -139,5 +140,11 @@
     border: none;
     font-size: 22px;
     cursor: pointer;
+    color: #dc3545;
+    transition: transform 0.2s ease;
   }
+  .favorite-btn:hover {
+    transform: scale(1.2);
+  }
+
 </style>

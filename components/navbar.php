@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $url_base = "http://localhost/restaurant/";
 
 // Get the current page URL

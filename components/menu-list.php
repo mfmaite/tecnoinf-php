@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include("../bd.php");
 
 $sortParam = $_GET['sort'] ?? 'name_asc';
@@ -24,18 +26,14 @@ $menus = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $isAdmin = isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin';
 
-$user_id = $_SESSION['user_id'] ?? null;
+$user_id = $_SESSION['user']['id'] ?? null;
 
 $favoritos = [];
 
 if ($user_id) {
-  $stmt = $conn->prepare("SELECT menu_id FROM favoritos WHERE user_id = ?");
-  $stmt->bind_param("i", $user_id);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  while ($row = $result->fetch_assoc()) {
-    $favoritos[] = $row['menu_id'];
-  }
+  $stmt = $connection->prepare("SELECT menu_id FROM favoritos WHERE user_id = ?");
+  $stmt->execute([$user_id]);
+  $favoritos = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
 }
 ?>
 
