@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS restaurant;
 USE restaurant;
 
+DROP TABLE IF EXISTS `favorites`;
 DROP TABLE IF EXISTS `menus`;
 DROP TABLE IF EXISTS `users`;
 

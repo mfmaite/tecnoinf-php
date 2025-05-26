@@ -20,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         if ($action === 'add') {
-            $check = $connection->prepare("SELECT COUNT(*) FROM favoritos WHERE user_id = ? AND menu_id = ?");
+            $check = $connection->prepare("SELECT COUNT(*) FROM favorites WHERE user_id = ? AND menu_id = ?");
             $check->execute([$user_id, $menu_id]);
             $exists = $check->fetchColumn();
 
             if (!$exists) {
-                $stmt = $connection->prepare("INSERT INTO favoritos (user_id, menu_id) VALUES (?, ?)");
+                $stmt = $connection->prepare("INSERT INTO favorites (user_id, menu_id) VALUES (?, ?)");
                 $stmt->execute([$user_id, $menu_id]);
             }
 
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: /restaurant/");
             }
         } elseif ($action === 'remove') {
-            $stmt = $connection->prepare("DELETE FROM favoritos WHERE user_id = ? AND menu_id = ?");
+            $stmt = $connection->prepare("DELETE FROM favorites WHERE user_id = ? AND menu_id = ?");
             $stmt->execute([$user_id, $menu_id]);
             echo "Eliminado de favoritos";
             if (isset($_SERVER['HTTP_REFERER'])) {

@@ -57,7 +57,7 @@ if ($user_id) {
 
 <div class="container">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="h2">Menú</h2>
+    <h2 class="h2">Favoritos</h2>
     <div class="d-flex align-items-center">
       <div class="sort-controls mr-3">
         <select class="custom-select" onchange="window.location.href = '?sort=' + this.value">
@@ -73,9 +73,8 @@ if ($user_id) {
       <?php endif; ?>
     </div>
   </div>
-        <!-- <pre><?php //print_r($menus); ?></pre> -->
   <div class="menuContainer">
-    <?php foreach ($menus as $menu): 
+    <?php foreach ($menus as $menu):
       $menuId = $menu['id'];
       $menuName = $menu['name'];
       $menuPrice = $menu['price'];
@@ -86,7 +85,7 @@ if ($user_id) {
   </div>
 
   <?php if (empty($menus)): ?>
-    <p class="text-center text-white">No hay menús disponibles.</p>
+    <p class="text-center text-white">No has agregado ningún menú a favoritos.</p>
   <?php endif; ?>
 </div>
 
