@@ -3,11 +3,12 @@
     <a href="/restaurant/admin/menu/delete/?id=<?= urlencode($menu['id']) ?>&name=<?= urlencode($menuName) ?>&price=<?= urlencode($menuPrice) ?>&image=<?= urlencode($imageSrc) ?>" class="button delete-btn">X</a>
   <?php else: ?>
     <!-- Botón de favoritos -->
+     <?php $isFavorite = in_array($menuId, $favoritos); ?>
     <form action="/restaurant/process/toggle-favorite.php" method="post" class="favorite-form" style="display:inline;">
       <input type="hidden" name="menu_id" value="<?= htmlspecialchars($menuId) ?>">
-      <input type="hidden" name="action" value="<?= in_array($menuId, $favoritos) ? 'remove' : 'add' ?>">
+      <input type="hidden" name="action" value="<?= $isFavorite ? 'remove' : 'add' ?>">
       <button type="submit" class="favorite-btn" style="border:none; background:none;">
-        <?= in_array($menuId, $favoritos) ? '❤️' : '🤍' ?>
+        <?= $isFavorite ? '❤️' : '🤍' ?>
       </button>
     </form>
 

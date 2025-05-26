@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$url_base = "http://localhost/restaurant/";
+$url_base = "http://localhost:8080/restaurant/";
 
 // Get the current page URL
 $current_page = $_SERVER['REQUEST_URI'];
@@ -41,6 +41,9 @@ $is_cart = strpos($current_page, '/restaurant/cart') !== false;
         </li>
         <li class="nav-item <?php echo $is_cart ? 'active' : ''; ?>">
           <a class="nav-link font-ultra" href="<?php echo $url_base; ?>cart">Carrito</a>
+        </li>
+        <li class="nav-item <?php echo $is_cart ? 'active' : ''; ?>">
+          <a class="nav-link font-ultra" href="<?php echo $url_base; ?>favorites">Favoritos</a>
         </li>
       <?php endif; ?>
 

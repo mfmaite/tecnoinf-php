@@ -7,10 +7,10 @@ include("../bd.php");
 $sortParam = $_GET['sort'] ?? 'name_asc';
 
 $sortOptions = [
-  'name_asc' => ['field' => 'name', 'order' => 'asc'],
-  'name_desc' => ['field' => 'name', 'order' => 'desc'],
-  'price_asc' => ['field' => 'price', 'order' => 'asc'],
-  'price_desc' => ['field' => 'price', 'order' => 'desc']
+  'name_asc' => ['field' => 'name', 'order' => 'ASC'],
+  'name_desc' => ['field' => 'name', 'order' => 'DESC'],
+  'price_asc' => ['field' => 'price', 'order' => 'ASC'],
+  'price_desc' => ['field' => 'price', 'order' => 'DESC']
 ];
 
 if (!array_key_exists($sortParam, $sortOptions)) {
@@ -20,13 +20,28 @@ if (!array_key_exists($sortParam, $sortOptions)) {
 $sortBy = $sortOptions[$sortParam]['field'];
 $order = $sortOptions[$sortParam]['order'];
 
-$query = $connection->prepare("SELECT * FROM menus ORDER BY {$sortBy} {$order}");
-$query->execute();
-$menus = $query->fetchAll(PDO::FETCH_ASSOC);
-
 $isAdmin = isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == 'admin';
-
 $user_id = $_SESSION['user']['id'] ?? null;
+
+if ($user_id) {
+    $query = $connection->prepare("
+        SELECT m.*, 1 AS is_favorite
+        FROM menus m
+        INNER JOIN favorites f ON m.id = f.menu_id
+        WHERE f.user_id = ?
+        ORDER BY m.$sortBy $order
+    ");
+    $query->execute([$user_id]);
+} else {
+    $query = $connection->prepare("
+        SELECT m.*, 0 AS is_favorite
+        FROM menus m
+        ORDER BY m.$sortBy $order
+    ");
+    $query->execute();
+}
+
+$menus = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $favoritos = [];
 
@@ -36,6 +51,7 @@ if ($user_id) {
   $favoritos = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
 }
 ?>
+
 
 <link rel="stylesheet" href="../CSS/fonts.css" type="text/css">
 
@@ -57,15 +73,16 @@ if ($user_id) {
       <?php endif; ?>
     </div>
   </div>
-
+        <!-- <pre><?php //print_r($menus); ?></pre> -->
   <div class="menuContainer">
-    <?php foreach ($menus as $menu) {
+    <?php foreach ($menus as $menu): 
       $menuId = $menu['id'];
       $menuName = $menu['name'];
       $menuPrice = $menu['price'];
       $imageSrc = $menu['photoUrl'];
+      $isFavorite = $menu['is_favorite'] == 1;
       include '../components/menu-card.php';
-    } ?>
+    endforeach; ?>
   </div>
 
   <?php if (empty($menus)): ?>

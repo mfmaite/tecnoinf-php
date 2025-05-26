@@ -30,10 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             echo "Agregado a favoritos";
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+            } else {
+                header("Location: /restaurant/");
+            }
         } elseif ($action === 'remove') {
             $stmt = $connection->prepare("DELETE FROM favoritos WHERE user_id = ? AND menu_id = ?");
             $stmt->execute([$user_id, $menu_id]);
             echo "Eliminado de favoritos";
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+            } else {
+                header("Location: /restaurant/");
+            }
         }
     } catch (PDOException $e) {
         http_response_code(500);
