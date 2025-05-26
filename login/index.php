@@ -2,7 +2,9 @@
 require_once __DIR__ . '/../middleware/auth.php';
 isAlreadyLoggedIn();
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include("../bd.php");
 
 $errors = [];
@@ -20,6 +22,7 @@ if ($_POST) {
 
         if ($user && password_verify($password, $user['password_hash'])) {
             $_SESSION['user'] = [
+                'id' => $user['id'], 
                 'email' => $user['email'],
                 'role' => $user['role']
             ];

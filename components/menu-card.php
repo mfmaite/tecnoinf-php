@@ -1,10 +1,18 @@
 <div class="card menuCard" style="width: 18rem;">
   <?php if (isset($isAdmin) && $isAdmin): ?>
-    <a href="/restaurant/admin/menu/delete/?id=<?= urlencode($menu['id']) ?>&name=<?= urlencode($menuName) ?>&price=<?= urlencode($menuPrice) ?>&image=<?= urlencode($imageSrc) ?>"
-       class="button delete-btn">
-      X
-    </a>
+    <a href="/restaurant/admin/menu/delete/?id=<?= urlencode($menu['id']) ?>&name=<?= urlencode($menuName) ?>&price=<?= urlencode($menuPrice) ?>&image=<?= urlencode($imageSrc) ?>" class="button delete-btn">X</a>
   <?php else: ?>
+    <!-- Botón de favoritos -->
+     <?php $isFavorite = in_array($menuId, $favoritos); ?>
+    <form action="/restaurant/process/toggle-favorite.php" method="post" class="favorite-form" style="display:inline;">
+      <input type="hidden" name="menu_id" value="<?= htmlspecialchars($menuId) ?>">
+      <input type="hidden" name="action" value="<?= $isFavorite ? 'remove' : 'add' ?>">
+      <button type="submit" class="favorite-btn" style="border:none; background:none;">
+        <?= $isFavorite ? '❤️' : '🤍' ?>
+      </button>
+    </form>
+
+    <!-- Botón de agregar al carrito -->
     <form action="/restaurant/process/add-to-cart.php" method="post">
       <input type="hidden" name="id" value="<?= htmlspecialchars($menuId) ?>">
       <input type="hidden" name="name" value="<?= htmlspecialchars($menuName) ?>">
@@ -13,11 +21,9 @@
       <button type="submit" class="button add-to-cart-btn">+</button>
     </form>
   <?php endif; ?>
-  <img
-    src="<?= htmlspecialchars(!empty($imageSrc) ? $imageSrc : '../images/default-menu.jpg') ?>"
-    class="card-img-top menuImage"
-    alt="<?= htmlspecialchars($menuName) ?>"
-  >
+
+  <img src="<?= htmlspecialchars(!empty($imageSrc) ? $imageSrc : '../images/default-menu.jpg') ?>" class="card-img-top menuImage" alt="<?= htmlspecialchars($menuName) ?>">
+
   <div class="card-body">
     <div class="title">
       <?= htmlspecialchars($menuName) ?>
@@ -123,4 +129,23 @@
     width: 100%;
     height: 100%;
   }
+
+  .favorite-form {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  .favorite-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #dc3545;
+    transition: transform 0.2s ease;
+  }
+  .favorite-btn:hover {
+    transform: scale(1.2);
+  }
+
 </style>

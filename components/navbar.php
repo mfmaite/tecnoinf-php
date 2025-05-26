@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $url_base = "http://localhost/restaurant/";
 
 // Get the current page URL
@@ -8,6 +10,7 @@ $is_home = strpos($current_page, '/restaurant/') !== false && strlen($current_pa
 $is_menu = strpos($current_page, '/restaurant/menu') !== false;
 $is_login = strpos($current_page, '/restaurant/login') !== false;
 $is_cart = strpos($current_page, '/restaurant/cart') !== false;
+$is_favorites = strpos($current_page, '/restaurant/favorites') !== false;
 ?>
 
 <link rel="stylesheet" href="<?php echo $url_base; ?>CSS/fonts.css">
@@ -39,6 +42,9 @@ $is_cart = strpos($current_page, '/restaurant/cart') !== false;
         </li>
         <li class="nav-item <?php echo $is_cart ? 'active' : ''; ?>">
           <a class="nav-link font-ultra" href="<?php echo $url_base; ?>cart">Carrito</a>
+        </li>
+        <li class="nav-item <?php echo $is_favorites ? 'active' : ''; ?>">
+          <a class="nav-link font-ultra" href="<?php echo $url_base; ?>favorites">Favoritos</a>
         </li>
       <?php endif; ?>
 
