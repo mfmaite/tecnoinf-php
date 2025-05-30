@@ -1,7 +1,5 @@
 <?php
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+  session_start();
   require_once __DIR__ . '/../middleware/auth.php';
   requireNonAdmin();
 
@@ -44,6 +42,13 @@
                         ?>
                     <?php endforeach; ?>
                 </ul>
+            <?php endif; ?>
+            <?php if (!empty($cart)): ?>
+                <div class="text-center mt-4">
+                     <form action="../process/checkout.php" method="POST">
+                     <button type="submit" class="btn btn-success">Finalizar compra</button>
+                     </form>
+                </div>
             <?php endif; ?>
         </div>
     </div>
