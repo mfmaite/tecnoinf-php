@@ -30,8 +30,9 @@ A restaurant website with menu management features built with PHP, MySQL, and Bo
    - Update the MySQL connection settings if needed:
      ```bash
      MYSQL_USER="root"
-     MYSQL_PASSWORD=""  # Update if you have set a password
+     MYSQL_PASSWORD=""
      MYSQL_HOST="localhost"
+     MYSQL_PORT="3376"
      ```
    - Update the XAMPP path according to your installation:
      ```bash
@@ -63,10 +64,13 @@ A restaurant website with menu management features built with PHP, MySQL, and Bo
 1. **Start XAMPP Services**
    - Make sure Apache and MySQL are running in XAMPP Control Panel
 
-2. **Generate the Vendor folder**
+2. **Create the .env file**
+   - You'll need to create the `.env` file and add the values for the keys detailed on `.env.example`. Reach for help if you don't know how to complete this!
+
+3. **Generate the Vendor folder**
     - To be able to test the emails functionalities, you will need to generate the Vendor folder with the command `composer install`
 
-3. **Access the Website**
+4. **Access the Website**
    - Open your web browser
    - Visit: `http://localhost/restaurant`
    - Admin panel: `http://localhost/restaurant/admin`
