@@ -1,10 +1,11 @@
 CREATE DATABASE IF NOT EXISTS restaurant;
 USE restaurant;
 
+DROP TABLE IF EXISTS `favorites`;
+DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `order_items`;
 DROP TABLE IF EXISTS `menus`;
 DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `order_items`;
-DROP TABLE IF EXISTS `orders`;
 
 CREATE TABLE `menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -22,7 +23,17 @@ CREATE TABLE `users` (
   `role` ENUM('admin', 'user') DEFAULT 'user',
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `favorites` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NOT NULL,
+    `menu_id` int(11) NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+    FOREIGN KEY (`menu_id`) REFERENCES menus(`id`),
+    UNIQUE(user_id, menu_id),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `orders` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,

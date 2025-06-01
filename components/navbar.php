@@ -11,6 +11,7 @@ $is_menu = strpos($current_page, '/restaurant/menu') !== false;
 $is_login = strpos($current_page, '/restaurant/login') !== false;
 $is_cart = strpos($current_page, '/restaurant/cart') !== false;
 $is_favorites = strpos($current_page, '/restaurant/favorites') !== false;
+$is_orders = strpos($current_page, '/restaurant/orders') !== false;
 ?>
 
 <link rel="stylesheet" href="<?php echo $url_base; ?>CSS/fonts.css">
@@ -45,6 +46,9 @@ $is_favorites = strpos($current_page, '/restaurant/favorites') !== false;
         </li>
         <li class="nav-item <?php echo $is_favorites ? 'active' : ''; ?>">
           <a class="nav-link font-ultra" href="<?php echo $url_base; ?>favorites">Favoritos</a>
+        </li>
+        <li class="nav-item <?php echo $is_orders ? 'active' : ''; ?>">
+          <a class="nav-link font-ultra" href="<?php echo $url_base; ?>orders">Pedidos</a>
         </li>
       <?php endif; ?>
 
