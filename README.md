@@ -63,19 +63,12 @@ A restaurant website with menu management features built with PHP, MySQL, and Bo
 1. **Start XAMPP Services**
    - Make sure Apache and MySQL are running in XAMPP Control Panel
 
-2. **Access the Website**
+2. **Generate the Vendor folder**
+    - To be able to test the emails functionalities, you will need to generate the Vendor folder with the command `composer install`
+
+3. **Access the Website**
    - Open your web browser
    - Visit: `http://localhost/restaurant`
    - Admin panel: `http://localhost/restaurant/admin`
 
-## Features
-
-- Menu Management System
-  - View all menu items
-  - Add new menu items (Admin)
-  - Edit existing menu items (Admin)
-  - Delete menu items (Admin)
-- Responsive Design
-- Modern UI with Bootstrap 4
-- Custom Fonts (Ultra and Kirang Haerang)
 
